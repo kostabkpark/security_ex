@@ -10,6 +10,7 @@ import java.util.Collection;
  *  사용자 인증 정보 저장하기 위한 userdetails 구현 클래스
  */
 @Getter
+//@Builder
 public class LoginUser extends User {
   private String displayname;
   private String phoneNumber;
