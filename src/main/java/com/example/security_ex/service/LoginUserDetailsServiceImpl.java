@@ -5,6 +5,7 @@ import com.example.security_ex.domain.Users;
 import com.example.security_ex.repository.UsersMapperRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -25,16 +26,11 @@ public class LoginUserDetailsServiceImpl implements UserDetailsService {
     if(user == null) {
       return null;
     } else {
-      LoginUser loginUser = new LoginUser(
-          user.getUsername(),
-          user.getPassword(),
-//          user.getAuthority(),
-          user.getDisplayname(),
-          user.getPhoneNumber()
-      );
-
-      return null;
+      return User.builder()
+          .username(user.getUsername())
+          .password(user.getPassword())
+          .roles(user.getAuthority())
+          .build();
     }
-
   }
 }
