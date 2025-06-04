@@ -31,7 +31,11 @@ public class SpringSecurityConfig {
               .passwordParameter("pwd")
               .failureUrl("/login?error")
               .defaultSuccessUrl("/"))
-         .logout(Customizer.withDefaults());
+         .logout(logout -> logout
+              .logoutUrl("/logout")
+              .logoutSuccessUrl("/login?logout")
+              .invalidateHttpSession(true)
+              .deleteCookies("JSESSIONID"));
     return http.build();
   }
 }
